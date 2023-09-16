@@ -295,7 +295,7 @@ test.describe('"rakibul" Personal WordPress site', () => {
         await page.getByRole('heading', { name: 'Mindblown: a blog about philosophy.' }).isVisible();
         await page.getByRole('heading', { name: 'Hello world!' }).isVisible();
         
-        // only take a screenshot
+        // take a screenshot
         await page.screenshot({ path: 'tests/SinglePublicPage/Screenshots/Forntend.png', fullPage: true });
 
     });
