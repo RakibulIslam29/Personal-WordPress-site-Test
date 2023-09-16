@@ -31,8 +31,6 @@ npx playwright install
 ## Run Application
 npm run check-functionality
 
-Expected Result
-* Test should pass
+Expected Result: Test should pass
 
-Actual Result
-* Passing tests locally
+Actual Result: Passing tests locally
