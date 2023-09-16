@@ -34,7 +34,7 @@ test.beforeEach(async ({ page }, testInfo) => {
 
         // Username and Password
         await page.getByText('Username or Email Address').isVisible();
-        await page.getByLabel('Username or Email Address').fill('admin'); 
+        await page.getByLabel('Username or Email Address').fill('admin');
         await page.getByText('Password', { exact: true }).isVisible();
         await page.getByLabel('Password', { exact: true }).fill('admin'); 
         await page.getByLabel('Show password').click();
