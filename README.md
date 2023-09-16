@@ -30,3 +30,9 @@ npm install
 npx playwright install
 ## Run Application
 npm run check-functionality
+
+##Expected
+Test should pass
+
+##Actual
+Passing tests locally
