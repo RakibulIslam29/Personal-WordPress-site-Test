@@ -25,9 +25,7 @@ test.beforeEach(async ({ page }, testInfo) => {
 
     testInfo.setTimeout(testInfo.timeout + 100000);
 
-        //force a logout before going to login in page
-        await page.goto('http://localhost/rakibul/wp-login.php?action=logout&_wpnonce=64fcd1226a');
-
+        // going to login in page
         await page.goto('http://localhost/rakibul/wp-login.php?loggedout=true&wp_lang=en_US');
 
         await page.getByRole('heading', { name: 'Powered by WordPress' }).isVisible(); // wordpress logo
