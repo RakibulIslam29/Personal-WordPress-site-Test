@@ -62,7 +62,7 @@ test.afterAll( async () =>{
 
 });
 
-test.describe('"rakibul" WordPress site', () => {
+test.describe('"rakibul" Personal WordPress site', () => {
 
     test('Check whether the “WP Dark Mode” Plugin is Active or not.', async ({ page }) => {
 
