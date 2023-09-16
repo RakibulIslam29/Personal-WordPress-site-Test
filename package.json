@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "check-functionality": "npx playwright test parsonal-wordpress-site.spec.js --workers=1 --project=chromium --headed"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
