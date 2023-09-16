@@ -25,9 +25,9 @@ IDE: Visual Studio Code
 ## Clone the repository
  git clone https://github.com/RakibulIslam29/WordPress-site.git
 ## Install dependencies
-node.js
-npm install
-npx playwright install
+: node.js
+: npm install
+: npx playwright install
 ## Run Application
 npm run check-functionality
 
