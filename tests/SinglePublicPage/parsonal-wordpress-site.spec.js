@@ -95,7 +95,10 @@ test.describe('"rakibul" Personal WordPress site', () => {
     test('If Active, navigate to the WP Dark Mode & continue. Otherwise, Install the Plugin and Activate it.', async ({ page }) => {
 
         await page.getByRole('link', { name: 'Plugins', exact: true }).click();
-        await page.locator('#menu-plugins').getByRole('link', { name: 'Add New' }).click();
+        await page
+            .locator('#menu-plugins')
+            .getByRole('link', { name: 'Add New' })
+            .click();
 
         await page.getByPlaceholder('Search plugins...').click();
         await page.getByPlaceholder('Search plugins...').fill('WP Dark Mode');
@@ -162,18 +165,22 @@ test.describe('"rakibul" Personal WordPress site', () => {
 
     test('Validate whether the Darkmode is working or not on the Admin Dashboard.', async ({ page }) => {
 
-        await page.getByRole('link', { name: 'Dashboard' }).click();
-        await page.getByRole('link', { name: 'Home' }).click();
-        await page.waitForLoadState('networkidle');
-        await page.$eval('body', el => {
-            const bodyBackgroundColor = getComputedStyle(el).backgroundColor;
-            console.log(bodyBackgroundColor);
-            if (bodyBackgroundColor === 'rgb(34, 34, 34)') {
-              console.log('Darkmode is working fine!');
-            } else {
-              console.log('Darkmode is not working!');
-            }
-          });
+        // admin page
+        await page.getByRole('link', { name: 'Howdy, admin' }).hover();
+        await page.getByRole('link', { name: 'admin', exact: true }).click();
+
+        // Verify Darkmode is working or not
+        await page.locator('#wpadminbar').isVisible();
+        await page.getByRole('rowheader', { name: 'Admin Color Scheme' }).isVisible();
+        await page
+            .locator('#color-picker div')
+            .filter({ hasText: 'Default' })
+            .isVisible(); 
+        await page.getByRole('heading', { name: 'Profile' }).isVisible();
+        await page.getByRole('heading', { name: 'Personal Options' }).isVisible();
+          
+        // Take a screenshot of the Admin dashboard
+        await page.screenshot({ path: 'tests/SinglePublicPage/Screenshots/Darkmode.png', fullPage: true });
 
     });
     
@@ -187,6 +194,7 @@ test.describe('"rakibul" Personal WordPress site', () => {
         await page.getByPlaceholder('Search installed plugins...').fill('WP Dark Mode');
         await page.getByPlaceholder('Search installed plugins...').press('Enter');
 
+        // Navigate to the WP Dark Mode and verfy details
         await page.getByRole('link', { name: 'WP Dark Mode', exact: true }).isVisible();
         await page.getByText('WP Dark Mode automatically enables a stunning dark mode of your website based on').isVisible();
         await page.getByText('Version 4.2.2 | By WPPOOL | View details').isVisible();
@@ -213,6 +221,7 @@ test.describe('"rakibul" Personal WordPress site', () => {
 
     test('Disable Keyboard Shortcut from the Accessibility Settings.', async ({ page }) => {
 
+        // Open WP Dark Mode Settings
         await page.getByRole('link', { name: 'WP Dark Mode' }).click();
         await page
             .locator('#toplevel_page_wp-dark-mode-settings')
@@ -223,7 +232,7 @@ test.describe('"rakibul" Personal WordPress site', () => {
         await page.getByRole('link', { name: ' Accessibility Settings' }).click();
         await page.getByText('Enable/disable the dark mode toggle shortcut. (Ctrl + ALt + D )').isVisible();
 
-        // Disable Accessibility Settings
+        // Disable Keyboard Shortcut
         await page
             .getByRole('row', { name: 'Keyboard Shortcut' })
             .locator('div')
@@ -235,6 +244,7 @@ test.describe('"rakibul" Personal WordPress site', () => {
 
     test('From Settings -> Animation - Enable “Darkmode Toggle Animation” & change the “Animation Effect” from the default selections (Select any one from the available options, except the default selected one).', async ({ page }) => {
 
+        //
         await page.getByRole('link', { name: 'WP Dark Mode' }).click();
         await page
             .locator('#toplevel_page_wp-dark-mode-settings')
@@ -249,7 +259,7 @@ test.describe('"rakibul" Personal WordPress site', () => {
         await page.getByRole('link', { name: 'WP Dark Mode' }).click();
         await page.getByText('Select the animation effect between dark/white mode.').isVisible();
 
-        //Animation Effect
+        // Animation Effect "Pulse"
         await page.getByLabel('Animation Effect').click();
         await page.getByLabel('Animation Effect').selectOption('pulse');
         await page.locator('#wp-dark-mode-animation-preview div').isVisible();
@@ -277,16 +287,16 @@ test.describe('"rakibul" Personal WordPress site', () => {
 
     test('Validate whether the Darkmode is working or not from the Frontend.', async ({ page }) => {
 
-        await page.getByRole('link', { name: 'WP Dark Mode' }).click();
-        await page
-            .locator('#toplevel_page_wp-dark-mode-settings')
-            .getByRole('link', { name: 'Settings' })
-            .click();
-        await page.getByText('Turn ON to enable the darkmode in the frontend.').isVisible(); //verify frontend darkmode is not enable
-        await page
-            .getByRole('row', { name: 'Enable Frontend Darkmode' })
-            .getByRole('cell')
-            .isVisible(); // Frontend Dakmode need to enable
+        //  visit site
+        await page.getByRole('link', { name: ' rakibul' }).click();
+
+        // Verify Darkmode is working or not from the Frontend
+        await page.getByText('rakibul Sample Page').isVisible();
+        await page.getByRole('heading', { name: 'Mindblown: a blog about philosophy.' }).isVisible();
+        await page.getByRole('heading', { name: 'Hello world!' }).isVisible();
+        
+        // only take a screenshot
+        await page.screenshot({ path: 'tests/SinglePublicPage/Screenshots/Forntend.png', fullPage: true });
 
     });
 
