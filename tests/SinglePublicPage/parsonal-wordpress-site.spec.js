@@ -34,9 +34,9 @@ test.beforeEach(async ({ page }, testInfo) => {
 
         // Username and Password
         await page.getByText('Username or Email Address').isVisible();
-        await page.getByLabel('Username or Email Address').fill('admin');
+        await page.getByLabel('Username or Email Address').fill('');
         await page.getByText('Password', { exact: true }).isVisible();
-        await page.getByLabel('Password', { exact: true }).fill('admin'); 
+        await page.getByLabel('Password', { exact: true }).fill(''); 
         await page.getByLabel('Show password').click();
         await page.getByLabel('Hide password').click();
 
@@ -253,10 +253,10 @@ test.describe('"rakibul" Personal WordPress site', () => {
             
         await page.getByRole('link', { name: ' Animation' }).click(); // Animation
         await page.getByText('Enable/ disable the dark mode toggle animation between dark/white mode.').isVisible();
-
+await page.pause();
         // Enable “Darkmode Toggle Animation”
         await page.locator('label[for="wppool-wp_dark_mode_animation[toggle_animation]"] div[class="wp-dark-mode-ignore"]').click();
-        await page.getByRole('link', { name: 'WP Dark Mode' }).click();
+        // await page.getByRole('link', { name: 'WP Dark Mode' }).click();
         await page.getByText('Select the animation effect between dark/white mode.').isVisible();
 
         // Animation Effect "Pulse"
