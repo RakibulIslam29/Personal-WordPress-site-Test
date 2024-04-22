@@ -253,7 +253,7 @@ test.describe('"rakibul" Personal WordPress site', () => {
             
         await page.getByRole('link', { name: ' Animation' }).click(); // Animation
         await page.getByText('Enable/ disable the dark mode toggle animation between dark/white mode.').isVisible();
-await page.pause();
+
         // Enable “Darkmode Toggle Animation”
         await page.locator('label[for="wppool-wp_dark_mode_animation[toggle_animation]"] div[class="wp-dark-mode-ignore"]').click();
         // await page.getByRole('link', { name: 'WP Dark Mode' }).click();
